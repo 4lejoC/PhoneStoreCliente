@@ -106,7 +106,7 @@ export default {
             if (this.DNI && this.username && this.password) {
                 try {
                     // Realizar la llamada al API
-                    const response = await fetch(`http://phonestore.runasp.net/api/Usuario?DNI=${encodeURIComponent(this.DNI)}`);
+                    const response = await fetch(`/api/Usuario?DNI=${encodeURIComponent(this.DNI)}`);
 
                     if (!response.ok) {
                         throw new Error("Error al obtener el usuario");
@@ -191,7 +191,7 @@ export default {
             contenedor.appendChild(botonBorrar);
 
             try {
-                const response = await fetch('http://phonestore.runasp.net/api/Producto');
+                const response = await fetch('/api/Producto');
                 if (!response.ok) throw new Error('Error al obtener productos desde la API');
                 const productos = await response.json();
 
@@ -305,7 +305,7 @@ export default {
             const id = 1; // El ID que se utiliza según tu código en el controlador
 
             try {
-                const response = await fetch(`http://phonestore.runasp.net/api/DatosGenerales/${id}`);
+                const response = await fetch(`/api/DatosGenerales/${id}`);
                 if (!response.ok) {
                     throw new Error('Error al obtener los datos generales');
                 }
@@ -368,7 +368,7 @@ export default {
                 const totalFac = this.total;
                 const id = 1;
 
-                const response = await fetch(`http://phonestore.runasp.net/api/DatosGenerales/${id}`);
+                const response = await fetch(`/api/DatosGenerales/${id}`);
                 if (!response.ok) {
                     throw new Error('Error al obtener los datos generales');
                 }
@@ -400,7 +400,7 @@ export default {
                 };
 
                 // Guardar la factura en el servidor llamando al controlador Factura/Create
-                const saveResponse = await axios.post(`http://phonestore.runasp.net/api/Factura`, factura);
+                const saveResponse = await axios.post(`/api/Factura`, factura);
 
                 // No es necesario verificar saveResponse.status ya que Axios lanzará un error si hay un problema
                 alert('Factura guardada correctamente.');
@@ -445,7 +445,7 @@ export default {
                 const totalFac = this.total;
                 const id = 1;
 
-                const response = await fetch(`http://phonestore.runasp.net/api/DatosGenerales/${id}`);
+                const response = await fetch(`/api/DatosGenerales/${id}`);
                 if (!response.ok) {
                     throw new Error('Error al obtener los datos generales');
                 }
@@ -477,7 +477,7 @@ export default {
                 };
 
                 // Guardar la factura en el servidor llamando al controlador Factura/Create
-                const saveResponse = await axios.post(`http://phonestore.runasp.net/api/Factura`, factura);
+                const saveResponse = await axios.post(`/api/Factura`, factura);
 
                 // No es necesario verificar saveResponse.status ya que Axios lanzará un error si hay un problema
                 alert('Factura guardada correctamente.');
@@ -506,7 +506,7 @@ export default {
             try {
                 // Obtener datos generales como IVA
                 const id = 1;
-                const response = await fetch(`http://phonestore.runasp.net/api/DatosGenerales/${id}`);
+                const response = await fetch(`/api/DatosGenerales/${id}`);
                 if (!response.ok) {
                     throw new Error('Error al obtener los datos generales');
                 }
@@ -528,7 +528,7 @@ export default {
                             PRD_SUBTOTAL: subtotalPrd
                         };
 
-                        const detalleResponse = await axios.post(`http://phonestore.runasp.net/api/Detalle_Factura`, detalleFactura);
+                        const detalleResponse = await axios.post(`/api/Detalle_Factura`, detalleFactura);
 
                         // Manejar la respuesta si es necesario
                         console.log('Detalle guardado:', detalleResponse.data);
@@ -552,7 +552,7 @@ export default {
 
             for (const producto of carrito) {
                 try {
-                    const response = await axios.get(`http://phonestore.runasp.net/api/Producto?PrdNombre=${producto.id}`);
+                    const response = await axios.get(`/api/Producto?PrdNombre=${producto.id}`);
                     const productoADebitar = response.data;
 
                     // Validar que el producto exista
@@ -567,7 +567,7 @@ export default {
 
 
                     // Enviar la actualización al servidor
-                    const debitarResponse = await axios.put(`http://phonestore.runasp.net/api/Producto/${producto.PRD_ID}`, productoADebitar);
+                    const debitarResponse = await axios.put(`/api/Producto/${producto.PRD_ID}`, productoADebitar);
 
                 } catch (error) {
                     // Manejar errores en la solicitud
@@ -588,14 +588,14 @@ export default {
                 const id = 1;
 
                 // Obtener los datos generales
-                const response = await axios.get(`http://phonestore.runasp.net/api/DatosGenerales/${id}`);
+                const response = await axios.get(`/api/DatosGenerales/${id}`);
                 const datos = response.data;
 
                 // Incrementar el número de factura
                 datos.NUM_FAC++;
 
                 // Enviar la actualización al servidor
-                const CambiarResponse = await axios.put(`http://phonestore.runasp.net/api/DatosGenerales/${id}`, datos);
+                const CambiarResponse = await axios.put(`/api/DatosGenerales/${id}`, datos);
 
                 console.log("Número de factura actualizado correctamente:", CambiarResponse.data);
             } catch (error) {
@@ -612,7 +612,7 @@ export default {
                 const nuevaContrasena = document.getElementById("password").value;
 
                 // Enviar la solicitud POST con Axios
-                const response = await axios.post('http://phonestore.runasp.net/api/Usuario', {
+                const response = await axios.post('/api/Usuario', {
                     USU_DNI: nuevoDNI,
                     USU_NOMBRE: nuevoUsuario,
                     USU_CONTRASENA: nuevaContrasena

@@ -69,7 +69,7 @@ export default {
   methods: {
     async obtenerProductos() {
       try {
-        const response = await fetch('http://phonestore.runasp.net/api/Producto');
+        const response = await fetch('/api/Producto');
         if (!response.ok) {
           throw new Error('Error en la respuesta de la API');
         }
