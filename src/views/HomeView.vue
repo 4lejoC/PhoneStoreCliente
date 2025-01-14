@@ -23,7 +23,13 @@
       <div class="foto-container">
         <div
           id="foto"
-          :style="{ backgroundImage: `url(${producto.PRD_IMAGEN})`, height: '150px', backgroundSize: 'cover' }"
+          :style="{
+            backgroundImage: `url(${producto.PRD_IMAGEN})`,
+            height: '150px',
+            backgroundSize: 'contain', /* Cambiado de 'cover' a 'contain' */
+            backgroundPosition: 'center', /* Centra la imagen dentro del div */
+            backgroundRepeat: 'no-repeat' /* Evita que la imagen se repita */
+          }"
         ></div>
       </div>
       <div class="producto-info">
